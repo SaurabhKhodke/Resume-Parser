@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parsing Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .result-card {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .result-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .result-item i {
+            font-size: 24px;
+            color: #007bff;
+        }
+        .result-item h4 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .result-item p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #555;
+        }
+        ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        li {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-card">
+        <div class="result-grid">
+            <!-- Full Name -->
+            <div class="result-item">
+                <i class="fas fa-user"></i>
+                <div>
+                    <h4>Full Name</h4>
+                    <p>{{ info.name }}</p>
+                </div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="result-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <h4>Email Address</h4>
+                    <p>{{ info.email }}</p>
+                </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="result-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                    <h4>Phone Number</h4>
+                    <p>{{ info.phone }}</p>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="result-item">
+                <i class="fas fa-tools"></i>
+                <div>
+                    <h4>Skills</h4>
+                    {% if info.skills %}
+                        <p>{{ info.skills | join(", ") }}</p>
+                    {% else %}
+                        <p>No skills found</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="result-item">
+                <i class="fas fa-graduation-cap"></i>
+                <div>
+                    <h4>Education</h4>
+                    {% if info.education %}
+                        <ul>
+                            {% for edu in info.education %}
+                                <li>
+                                    {{ edu.institution }} - {{ edu.degree }}
+                                    {% if edu.duration != "Not Found" %}({{ edu.duration }}){% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No education details found</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div class="result-item">
+                <i class="fas fa-briefcase"></i>
+                <div>
+                    <h4>Experience</h4>
+                    {% if info.experience %}
+                        <ul>
+                            {% for exp in info.experience %}
+                                <li>
+                                    {{ exp.title }} at {{ exp.company }}
+                                    {% if exp.duration != "Not Found" %}({{ exp.duration }}){% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No experience details found</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- AI Rating -->
+            <div class="result-item">
+                <i class="fas fa-star"></i>
+                <div>
+                    <h4>AI Rating</h4>
+                    <p>{{ info.rating }}/10</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

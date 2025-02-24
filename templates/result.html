@@ -1,0 +1,123 @@
+<!-- Enhanced result.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8">
+    <title>Analysis Results - ResumeParser Pro</title>
+</head>
+<body>
+    <nav class="navbar">
+        <!-- Same navbar as index.html -->
+    </nav>
+
+    <div class="result-hero">
+        <div class="result-header">
+            <h2><i class="fas fa-check-circle"></i> Resume Analyzed Successfully</h2>
+            <p class="result-sub">AI-Powered Insights Generated</p>
+        </div>
+    </div>
+
+    <div class="result-card">
+        <div class="result-grid">
+            <!-- Full Name -->
+            <div class="result-item">
+                <i class="fas fa-user"></i>
+                <div>
+                    <h4>Full Name</h4>
+                    <p>{{ info.name }}</p>
+                </div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="result-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <h4>Email Address</h4>
+                    <p>{{ info.email }}</p>
+                </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="result-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                    <h4>Phone Number</h4>
+                    <p>{{ info.phone }}</p>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="result-item">
+                <i class="fas fa-tools"></i>
+                <div>
+                    <h4>Skills</h4>
+                    {% if info.skills %}
+                        <p>{{ info.skills | join(", ") }}</p>
+                    {% else %}
+                        <p>No skills found</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="result-item">
+                <i class="fas fa-graduation-cap"></i>
+                <div>
+                    <h4>Education</h4>
+                    {% if info.education %}
+                        <ul>
+                            {% for edu in info.education %}
+                                <li>
+                                    {{ edu.institution }} - {{ edu.degree }}
+                                    {% if edu.duration != "Not Found" %}({{ edu.duration }}){% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No education details found</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div class="result-item">
+                <i class="fas fa-briefcase"></i>
+                <div>
+                    <h4>Experience</h4>
+                    {% if info.experience %}
+                        <ul>
+                            {% for exp in info.experience %}
+                                <li>
+                                    {{ exp.title }} at {{ exp.company }}
+                                    {% if exp.duration != "Not Found" %}({{ exp.duration }}){% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No experience details found</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- AI Rating -->
+            <div class="result-item">
+                <i class="fas fa-star"></i>
+                <div>
+                    <h4>AI Rating</h4>
+                    <p>{{ info.rating }}/10</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        
+        <div class="cta-section">
+            <a href="{{ url_for('index') }}" class="cta-btn">
+                <i class="fas fa-arrow-left"></i> Analyze Another Resume
+            </a>
+        </div>
+    </div>
+</body>
+</html>

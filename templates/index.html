@@ -1,0 +1,58 @@
+<!-- Updated index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeParser Pro - Smart CV Analysis</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">ResumeParser<span>Pro</span></h1>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">Transform Your Hiring Process</h2>
+            <p class="hero-subtitle">AI-powered Resume Analysis in Seconds</p>
+            
+            <div class="upload-container">
+                <h3>Upload Your Resume</h3>
+                <form method="post" enctype="multipart/form-data" class="upload-form">
+                    <div class="file-drop-area">
+                        <i class="fas fa-cloud-upload-alt fa-3x"></i>
+                        <input type="file" name="resume" id="fileInput" accept="application/pdf" required>
+                        <label for="fileInput" class="file-label">Choose PDF File</label>
+                        <span class="file-name"></span>
+                    </div>
+                    <button type="submit" class="analyze-btn">
+                        Analyze Now <i class="fas fa-magic"></i>
+                    </button>
+                </form>
+                <p class="supported-files">Supported Format: PDF</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add features section and other content here -->
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>
